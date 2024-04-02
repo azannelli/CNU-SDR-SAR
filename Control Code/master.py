@@ -9,9 +9,9 @@ import time #allows for time.sleep() function
 #signal duration will need to be adjusted based on testing
 #grc_or_python will need to be adjusted based on the file being used
 #arduino_start_key shouldnt need to be changed if using arduino code provided
-file_path = 'placeholder.grc'
-arduino_start_key = 1
-arduino_reset_key = 2
+file_path = '../GNU-Radio/test.grc'
+arduino_start_key = '1'
+arduino_reset_key = '2'
 signal_duration_seconds = 5
 grc_or_python = False #true for python, false for grc
 
@@ -52,6 +52,8 @@ if __name__ == "__main__":
     #starts arduino moving
     arduino.write(bytes(arduino_start_key, 'utf-8'))
     time.sleep(0.1)#small delay to allow start of arduino
+
+    print(file_path)
 
     #make sure to update below with the path to the flowchart
     process = execute_gnuradio_flowchart(file_path, is_python_file=grc_or_python)
