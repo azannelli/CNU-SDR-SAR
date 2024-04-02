@@ -50,6 +50,7 @@ if __name__ == "__main__":
 
     #starts arduino moving
     arduino.write(bytes(arduino_start_key, 'utf-8'))
+    time.sleep(0.1)#small delay to allow start of arduino
 
     #make sure to update below with the path to the flowchart
     process = execute_gnuradio_flowchart(file_path, is_python_file=grc_or_python)
