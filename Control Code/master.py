@@ -11,7 +11,8 @@ import time #allows for time.sleep() function
 #arduino_start_key shouldnt need to be changed if using arduino code provided
 file_path = 'placeholder.grc'
 arduino_start_key = 1
-signal_duration_seconds = 10
+arduino_reset_key = 2
+signal_duration_seconds = 5
 grc_or_python = False #true for python, false for grc
 
 #**ARDUNIO CONNECTION FUNCTION**
@@ -61,5 +62,8 @@ if __name__ == "__main__":
     #close gnu radio flowgraph
     process.terminate()
 
+    #reset position of arduino
+    arduino.write(bytes(arduino_reset_key, 'utf-8'))
+    time.sleep(0.1)#small delay to allow reset of arduino
     #close arduino and stop movement
     arduino.close()
