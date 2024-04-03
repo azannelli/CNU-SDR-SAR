@@ -5,6 +5,7 @@ int dir = 9;
 void setup() {
   pinMode(pul,OUTPUT);
   pinMode(dir,OUTPUT);
+  pinMode(dir,OUTPUT);
   Serial.begin(9600);
 }
 
@@ -20,7 +21,7 @@ void moveFunc(int numSteps, int direction){
   }
   else if(direction == 0){
     digitalWrite(dir,LOW);
-    for(int x = 0; x < 200; x++){
+    for(int x = 0; x < numSteps; x++){
       digitalWrite(pul,HIGH);
       delayMicroseconds(5000);
       digitalWrite(pul,LOW);
@@ -44,11 +45,11 @@ void loop() {
     switch (inByte) {
 
       case '1': {
-        //move forward
+        moveForward();
         break;
       }
       case '2': {
-        //move back
+        moveBack();
         break;
       }
     }
