@@ -93,8 +93,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [744, 200.0]
-    rotation: 0
+    coordinate: [584, 280.0]
+    rotation: 180
     state: true
 - name: blocks_complex_to_real_0_0
   id: blocks_complex_to_real
@@ -112,6 +112,46 @@ blocks:
     coordinate: [392, 400.0]
     rotation: 0
     state: true
+- name: blocks_delay_0
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: '2'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    showports: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [696, 80.0]
+    rotation: 0
+    state: enabled
+- name: blocks_delay_1
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: '2'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    showports: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1176, 440.0]
+    rotation: 0
+    state: enabled
 - name: blocks_file_sink_0_0
   id: blocks_file_sink
   parameters:
@@ -119,7 +159,7 @@ blocks:
     alias: ''
     append: 'False'
     comment: ''
-    file: C:\Users\Cames\Downloads\New.dat
+    file: C:\Users\alexz\OneDrive\Desktop\SDRSAR\CNU-SDR-SAR\data\sardata.dat
     type: float
     unbuffered: 'False'
     vlen: '1'
@@ -127,7 +167,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1264, 340.0]
+    coordinate: [1296, 468.0]
     rotation: 0
     state: true
 - name: blocks_head_0
@@ -138,7 +178,7 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    num_items: '25000000'
+    num_items: samp_rate * 12
     type: float
     vlen: '1'
   states:
@@ -163,7 +203,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [688, 344.0]
+    coordinate: [704, 352.0]
     rotation: 0
     state: true
 - name: blocks_skiphead_0
@@ -174,7 +214,7 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    num_items: '4157'
+    num_items: samp_rate*2
     type: float
     vlen: '1'
   states:
@@ -199,7 +239,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [296, 172.0]
+    coordinate: [288, 156.0]
     rotation: 0
     state: true
 - name: hilbert_fc_0
@@ -217,7 +257,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [512, 192.0]
+    coordinate: [512, 176.0]
     rotation: 0
     state: true
 - name: qtgui_sink_x_0
@@ -246,9 +286,65 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1224, 200.0]
+    coordinate: [1304, 272.0]
     rotation: 0
     state: true
+- name: snippet_0
+  id: snippet
+  parameters:
+    alias: ''
+    code: "#START BLOCK FOR GNU-RADIO ARDUINO CONNECTION PUT IN PYTHON SNIPPET BLOCK\
+      \ WITH AFTER START\n\nimport serial #allows for serial communication to arduino\n\
+      from serial.tools import list_ports #allows for listing of available ports\n\
+      import time #allows for time.sleep() function\ndef initialize_arduino_by_serial_number(target_serial_number,\
+      \ baudrate=9600, timeout=0.1):\n    ports = list_ports.comports()\n    for port\
+      \ in ports:\n        if port.serial_number == target_serial_number:\n      \
+      \      try:\n                arduino = serial.Serial(port=port.device, baudrate=baudrate,\
+      \ timeout=timeout)\n                print(f\"Arduino connected on {port.device}\"\
+      )\n                return arduino\n            except serial.SerialException\
+      \ as e:\n                print(f\"Failed to connect to Arduino on {port.device}:\
+      \ {e}\")\n                return None\n    print(\"Arduino with specified serial\
+      \ number not found. Please check your connection.\")\n    return None\ntarget_serial_number\
+      \ = '55431313338351610291'\narduino = initialize_arduino_by_serial_number(target_serial_number)\n\
+      time.sleep(2)\narduino.write(b'1')"
+    comment: Start Block for Arduino
+    priority: '0'
+    section: main_after_start
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 516.0]
+    rotation: 0
+    state: enabled
+- name: snippet_0_0
+  id: snippet
+  parameters:
+    alias: ''
+    code: "#STOP BLOCK FOR GNU-RADIO ARDUINO CONNECTION PUT IN PYTHON SNIPPET BLOCK\
+      \ WITH AFTER STOP\n\nimport serial #allows for serial communication to arduino\n\
+      from serial.tools import list_ports #allows for listing of available ports\n\
+      import time #allows for time.sleep() function\ndef initialize_arduino_by_serial_number(target_serial_number,\
+      \ baudrate=9600, timeout=0.1):\n    ports = list_ports.comports()\n    for port\
+      \ in ports:\n        if port.serial_number == target_serial_number:\n      \
+      \      try:\n                arduino = serial.Serial(port=port.device, baudrate=baudrate,\
+      \ timeout=timeout)\n                print(f\"Arduino connected on {port.device}\"\
+      )\n                return arduino\n            except serial.SerialException\
+      \ as e:\n                print(f\"Failed to connect to Arduino on {port.device}:\
+      \ {e}\")\n                return None\n    print(\"Arduino with specified serial\
+      \ number not found. Please check your connection.\")\n    return None\ntarget_serial_number\
+      \ = '55431313338351610291'\narduino = initialize_arduino_by_serial_number(target_serial_number)\n\
+      time.sleep(2)\narduino.write(b'2')"
+    comment: Stop/Reset block for arduino
+    priority: '0'
+    section: main_after_stop
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [472, 516.0]
+    rotation: 0
+    state: enabled
 - name: uhd_usrp_sink_0
   id: uhd_usrp_sink
   parameters:
@@ -523,7 +619,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [728, 24.0]
+    coordinate: [848, 24.0]
     rotation: 0
     state: true
 - name: uhd_usrp_source_0
@@ -967,15 +1063,17 @@ connections:
 - [analog_sig_source_x_0, '0', blocks_vco_f_0, '0']
 - [blocks_complex_to_real_0, '0', blocks_multiply_xx_0, '0']
 - [blocks_complex_to_real_0_0, '0', blocks_multiply_xx_0, '1']
-- [blocks_head_0, '0', blocks_file_sink_0_0, '0']
-- [blocks_head_0, '0', qtgui_sink_x_0, '0']
+- [blocks_delay_0, '0', uhd_usrp_sink_0, '0']
+- [blocks_delay_1, '0', blocks_file_sink_0_0, '0']
+- [blocks_delay_1, '0', qtgui_sink_x_0, '0']
+- [blocks_head_0, '0', blocks_delay_1, '0']
 - [blocks_multiply_xx_0, '0', blocks_skiphead_0, '0']
 - [blocks_skiphead_0, '0', blocks_head_0, '0']
 - [blocks_vco_f_0, '0', hilbert_fc_0, '0']
 - [hilbert_fc_0, '0', blocks_complex_to_real_0, '0']
-- [hilbert_fc_0, '0', uhd_usrp_sink_0, '0']
+- [hilbert_fc_0, '0', blocks_delay_0, '0']
 - [uhd_usrp_source_0, '0', blocks_complex_to_real_0_0, '0']
 
 metadata:
   file_format: 1
-  grc_version: 3.10.8.0
+  grc_version: 3.10.9.2
